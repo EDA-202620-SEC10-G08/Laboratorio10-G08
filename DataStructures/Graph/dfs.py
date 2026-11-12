@@ -33,4 +33,13 @@ def has_path_to(key_v, visited_map):
     return mlp.contains(visited_map, key_v)
 
 def path_to(key_v, visited_map):
+    if has_path_to(key_v, visited_map):
+        camino = st.new_stack()
+        while key_v != None:
+            anterior = mlp.get(visited_map, key_v)["edge_from"]
+            st.push(camino, key_v)
+            key_v = anterior
+        return camino
     
+    else:
+        return None
