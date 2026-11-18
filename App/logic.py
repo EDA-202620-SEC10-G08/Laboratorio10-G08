@@ -214,7 +214,7 @@ def add_route_stop(analyzer, service):
     """
     stop_info = m.get(analyzer['stops'], service['BusStopCode'])
     stop_services = stop_info['services']
-    if lt.is_present(stop_services, service['ServiceNo'], lt.default_function) == -1:
+    if lt.is_present(stop_services, service['ServiceNo'], default_function) == -1:
         lt.add_last(stop_services, service['ServiceNo'])
 
     return analyzer
@@ -311,6 +311,18 @@ def show_calculated_shortest_route(analyzer, destination_stop):
 # ___________________________________________________
 # Funciones Helper
 # ___________________________________________________
+
+def default_function(element1, element2):
+    """
+    Función de comparación: retorna 0 si son iguales, 1 si element1 es
+    mayor y -1 si es menor.
+    """
+    if element1 == element2:
+        return 0
+    elif element1 > element2:
+        return 1
+    return -1
+
 
 def clean_service_distance(lastservice, service):
     """
