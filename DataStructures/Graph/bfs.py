@@ -23,4 +23,4 @@ def has_path_to():
     pass
 
 def path_to():
-    pass
+    if
