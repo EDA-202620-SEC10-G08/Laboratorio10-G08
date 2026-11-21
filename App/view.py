@@ -137,8 +137,31 @@ def option_four(cont):
     print(" -> ".join(line))
 
 def option_five(cont):
-    # TODO: Imprimir los resultados de la opción 5
-    ...
+    print("\n----- OPCIÓN 5 ----")
+    stop1 = input("Origen: ").strip()
+    stop2 = input("Destino: ").strip()
+    print("Origen: '" + stop1 + "'")
+    print("Destino: '" + stop2 + "'")
+
+    path = logic.get_shortest_route_between_stops(cont, stop1, stop2)
+    if path is None:
+        print("\nNo se encontró una ruta entre las paradas.")
+        return
+
+    current_bus = None
+    line = []
+    for i in range(al.size(path)):
+        code, bus = al.get_element(path, i).split('-', 1)
+        if bus != current_bus:
+            if line:
+                print(" -> ".join(line) + " ->")
+                line = []
+                print("--- Cambiar a bus '" + bus + "' en la parada '" + code + "' ---")
+            else:
+                print("\n--- Tomar bus '" + bus + "' desde '" + code + "' ---")
+            current_bus = bus
+        line.append(code)
+    print(" -> ".join(line))
 
 def option_six(cont):
     # (Opcional) TODO: Imprimir los resultados de la opción 6
